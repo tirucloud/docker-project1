@@ -15,14 +15,14 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/devsecopsprojects/2048-React-CICD.git'
+                git branch: 'main', url: 'https://github.com/tirucloud/docker-project1.git'
             }
         }
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Game \
-                    -Dsonar.projectKey=Game '''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Student-Reg-Form \
+                    -Dsonar.projectKey=Student-Reg-Form '''
                 }
             }
         }
@@ -43,9 +43,9 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build -t 2048 ."
-                       sh "docker tag 2048 tirucloud/2048:latest "
-                       sh "docker push tirucloud/2048:latest "
+                       sh "docker build -t  Student-Reg-Form ."
+                       sh "docker tag 2048 tirucloud/Student-Reg-Form:latest "
+                       sh "docker push tirucloud/Student-Reg-Form:latest "
                     }
                 }
             }
